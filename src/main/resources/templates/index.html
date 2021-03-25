@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+
+   	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-4.5.3-dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-4.5.3-dist/css/bootstrap.min.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <title>home Page</title>
+</head>
+<body onLoad="document.getElementById('purpose-selector').options[0].selected = 'selected';">
+
+    <div id ="header" class="bg-main">
+        <nav class="nav justify-content-end mr-4 pt-3">
+            <ul class="nav nav-index">
+                <li class="nav-item"><a class="nav-link" href="#">help</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"  data-toggle="modal" data-target="#exampleModal">Contract</a></li>
+                <li class="nav-item" th:if="${session.userName == null}">
+                	<a class="nav-link" th:href="loginPage">Login</a>
+                </li>
+                <li class="nav-item dropdown" th:if="${session.userName != null}">
+                	<a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#" th:text="${session.userName}"></a>
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+						  <li><a class="dropdown-item dropdown-link" th:href="@{/kabow/profile}">Thông tin cá nhân</a></li>
+						  <li><a class="dropdown-item dropdown-link" href="#">Danh sách yêu thích</a></li>
+						  <li><a class="dropdown-item dropdown-link" th:href="@{/kabow/logout}">Đăng xuất</a></li>
+						</ul>
+						
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <img class="mx-auto d-block mt-5" th:src="@{/images/logo.png}" width="40%" >
+        </div>
+
+        <form th:action="@{/kabow/searchLocation}" method="GET" th:object="${searching}">
+        <div class="form-row mt-5">
+            <div class="col">
+                <input type="text" class="form-control form-control-lg" placeholder="Địa Điểm"  th:field="*{location}">
+            </div>
+            <div class="col">
+                <select id="purpose-selector" class="form-control form-control-lg" th:field="*{category}">
+                    <option value=" " disabled selected="selected" hidden>Mục Đích</option>
+                    <option value="ăn uống">Ăn Uống</option>
+                    <option value="mua sắm">Mua Sắm</option>
+                    <option value="chụp hình">Chụp Hình</option>
+                    <option value="cắm trại">Cắm Trại</option>
+                    <option value="tham quan">Tham Quan</option>
+                    <option value="đi dạo">Đi dạo</option>
+                    <option value="khám phá">Khám Phá</option>
+                    <option value="tắm biển">Tắm biển</option>
+                </select>
+            </div>
+            <div class="col">
+                <input id= number-people type="text" class="form-control form-control-lg" placeholder="Số Lượng"  th:field="*{people}" autocomplete="off">
+            </div>
+        </div>
+            <div class=" text-center mt-3">
+                <button id="searching-btn" type="submit" class="btn-color-main btn-lg">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="web-information">
+        <div class="container">
+            <div class="row">
+                <div class="infor1 col-6 ">
+                    <h3>KaBow - công cụ tìm kiếm địa điểm du lịch ở Việt Nam</h3>
+                    KaBow hỗ trợ người dùng tìm kiếm những địa điểm du lịch tuỳ theo sở thích của  du khách. Với hơn 1,4 tỉ lượt truy cập website của chúng tôi hàng năm, du khách thường xuyên sử dụng công cụ tìm kiếm để tìm kiếm nơi để thư giãn hay vui chơi ở một thành phố nào đó. Giúp huẩn bị ngay cho kỳ nghỉ cuối tuần của bạn tại các thành phố như Hà Nội hay Nha Trang và bạn có thể dễ dàng tìm thấy địa điểm du lịch du khách mong muốn tại KaBow.
+                </div>
+                <div class="infor2 col-6 ">
+                    <h3>Tìm địa điểm du lịch hợp lý với KaBow</h3>
+                    Với KaBow bạn có thể dễ dàng tìm kiếm địa điểm vui chơi hay nghỉ ngơi theo sở thích. Nhập địa điểm bạn muốn đến và và mục đích bạn muốn đến đó và hãy để công cụ tìm kiếm của chúng tôi tìm kiếm địa điểm phù hợp cho bạn. Để điều chỉnh các kết quả tìm kiếm, bạn có thể lọc theo danh mục như dạo phố, đi ăn, đi biển  và các tiêu chuẩn khác. KaBow giúp các bạn tìm kiếm được những điểm du lịch tầm cỡ quốc gia và thế giới đến những điểm nhỏ để phù hợp mục đích và túi tiền của bạn.
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="infor1 col-6 ">
+                    <h3>Dịch vụ tận nơi  giúp bạn thoải mái trải nghiệm</h3>
+                    Ngoài tìm kiếm địa điểm vui chơi du lịch thì KaBow sẵn sàng phục vụ các bạn bởi dịch vụ cho thuê giá rẻ để phù hợp với điều kiện của các bạn. Các bạn từ phương xa đến muốn cùng bạn bè hay người thân đi chơi nhưng không muốn bị làm phiền thì có thể sử dụng dịch vụ thuê xe, có đầy đủ xe cho các bạn chọn từ 2 chỗ ,4 chỗ hay đến tận 16 chỗ luôn chờ sẵn sàng phục vụ các bạn. Các du khách từ người ngoài hay các bạn muốn tìm hiểu các địa danh hay địa điểm nào đó có thể sử dụng dịch vụ thuê hướng dẫn viên du lịch. Các bạn muốn đi biển hay đi cắm trại.. mà không mang theo đầy đủ dụng cụ có thể sử dụng dịch vụ cho thuê dụng cụ như máy ảnh, đồ lều trại… Để từ đó có được trải nghiệm tốt nhất đối với chuyến đi đó.
+                </div>
+                <div class="infor2 col-6 ">
+                    <h3>Cách tìm kiếm</h3>
+                    KaBow là một công cụ tìm kiếm địa điểm du lịch tối ưu. Các bạn có thể tìm kiếm địa điểm theo sở thích của mình như đi dạo chơi, đi chụp hình hay đi ăn…Mọi địa điểm chúng tôi đưa ra đều phù hợp với các điều kiện của các bạn. Các bạn chọn phần danh mục rồi từ đó chọn các tiêu chí đáp ứng nhu cầu rồi từ đó chọn được địa điểm mong muốn. Hãy để KaBow giúp bạn tìm địa điểm lý tưởng!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" >
+        <div class="footer mt-5">
+        <div class="col-10 text-center ml-auto mr-auto " style="color: #fff">
+            <p>Địa chỉ: 123 Nam Kỳ Khởi nghĩa, phường Hòa Qúy, quận Ngũ Hành Sơn, TP.Đà Nẵng</p>
+            <p>Tổng đài hỗ trợ: 19000099</p>
+            <p>Email: kabow@bk.com</p>
+            <p>© 2020 - Bản quyền thuộc về KaBow</p>
+        </div>
+    </div>
+    </div>
+
+<script type="text/javascript" th:src="@{/javascript/js/bootstrap.js}"></script>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Khoan Đã</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Bạn cần đăng nhập trước đã!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

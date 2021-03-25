@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-4.5.3-dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-4.5.3-dist/css/bootstrap.min.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/javascript\js\bootstrap.js}"></script>
+
+    <title>Home Page Admin</title>
+
+</head>
+<body>
+
+    <div id ="header" class="header-line bg-main" style="height: 30px;">
+    </div>
+    <div style="margin-left: 25%; margin-bottom: 1%; margin-top: 1%;" class="">
+        <div class=" " style="width: 20%; height: 80px; margin: 0 auto;">
+            <a th:href="@{/kabow/index}" >
+            <img th:src="@{/images/logo.png}"  style="max-height: 100%; max-width: 100%;">
+            </a>
+        </div>
+    </div>
+    <div class="content row">
+        <div class="left-container bg-main col-3">
+
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active mt-2" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+                 <!--<a class="nav-link mt-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Edit profile</a> -->
+                <a class="nav-link mt-2" id="v-pills-add_location-tab" data-toggle="pill" href="#v-pills-add_location" role="tab" aria-controls="v-pills-add_location" aria-selected="false">Add Location</a>
+                <a class="nav-link mt-2" id="v-pills-service-tab" data-toggle="pill" href="#v-pills-service" role="tab" aria-controls="v-pills-service" aria-selected="false">Add Service</a>
+                <a class="nav-link mt-2" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="false">Reply Report</a>
+                <a class="nav-link mt-2" id="v-pills-customer-tab" data-toggle="pill" href="#v-pills-customer" role="tab" aria-controls="v-pills-customer" aria-selected="false">List Customer</a>
+                <a class="nav-link mt-2" id="v-pills-admin-tab" data-toggle="pill" href="#v-pills-admin" role="tab" aria-controls="v-pills-admin" aria-selected="false">List Admin</a>
+                <a class="nav-link mt-2" id="v-pills-location-tab" data-toggle="pill" href="#v-pills-location" role="tab" aria-controls="v-pills-location" aria-selected="false">List Location</a>
+                <a class="nav-link mt-2"  th:href="@{/kabow/index}" >Back To Home Page</a>
+                <a class="nav-link mt-2" th:href="@{/kabow/logout}">Log-Out</a>
+            </div>
+        </div>
+        <div class="container col" style="height: 300px;">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="container text-center">
+                        <h2>WELCOME ADMIN!</h2>
+                    </div>
+                </div>
+                
+                <!--  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="container text-center">
+                        <h2>Edit profile</h2>
+                        <div class="edit-profile__form">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="">
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="">
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="Password" class="form-control form-control-lg" id="colFormLabelLg" placeholder="">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>-->
+                
+                <div class="tab-pane fade" id="v-pills-add_location" role="tabpanel" aria-labelledby="v-pills-add_location-tab">
+                    <div class="container text-center">
+                        <h2>Add location</h2>
+                        <div class="add-location">
+                            <form th:action="@{/kabow/admin/addLocation}" th:object= "${location}" method="POST" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="colFormLabel" name="Title" th:field="*{Title}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Detail</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{Detail}"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Category</label>
+                                    <div class="col-sm-10">
+                                        <select id="inputState" class="form-control" th:field="*{Category}">
+                                            <option value=" " selected="selected" hidden="true">Category...</option>
+											<option value="ăn uống">Ăn Uống</option>
+											<option value="mua sắm">Mua Sắm</option>
+											<option value="chụp hình">Chụp Hình</option>
+											<option value="cắm trại">Cắm Trại</option>
+											<option value="tham quan">Tham Quan</option>
+											<option value="đi dạo">Đi dạo</option>
+											<option value="khám phá">Khám Phá</option>
+											<option value="tắm biển">Tắm biển</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Amount Of People</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="colFormLabel" name="people" th:field="*{People}">
+                                    </div>
+                                </div>
+                                <small>Please go to "Add service" if don't have service</small>
+                                <div class="form-group row mt-3">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Upload Image</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" name="images" accept="image/png, image/jpeg" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row text-center add-location__btn" style="margin-left: 50%;">
+                                    <button type="submit" class="btn-color-main btn-lg">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show " id="v-pills-service" role="tabpanel" aria-labelledby="v-pills-service-tab">
+                    <div class="container text-center">
+                        <h2>Add Service</h2>
+                        <div class="add-location">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Service</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="colFormLabel" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">content</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Type</label>
+                                    <div class="col-sm-10">
+                                        <select id="inputState" class="form-control">
+                                            <option selected>Choose...</option>
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Upload Image</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" name="">
+                                    </div>
+                                </div>
+                                <div class="form-group row text-center add-location__btn" style="margin-left: 50%;">
+                                    <button type="submit" class="btn-color-main btn-lg">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show " id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab" >
+                    <div class="container">
+                        <h2 class="text-center">Reply report</h2>
+                        <div >
+                            <ul class="list-group mt-2 ">
+                                <li class="list-group-item list-group-item-action" >
+                                    <a href="#" target="blank" rel="noopener noreferrer" class="report-link">
+                                        <div class="row">
+                                            <div class="col report-title">
+                                                <h4>Report title</h4>
+                                            </div>
+                                            <div class="col-1 report-time">
+                                                <small>time</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col report-information" >
+                                                some information ........................................................................................................................................................................
+                                            </div>
+                                            <div class="col-2 report-sender mt-4">
+                                                <small>sender@bk.com</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="list-group-item list-group-item-action" >
+                                    <a href="#" target="blank" rel="noopener noreferrer" class="report-link">
+                                        <div class="row">
+                                            <div class="col report-title">
+                                                <h4>Report title</h4>
+                                            </div>
+                                            <div class="col-1 report-time">
+                                                <small>time</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col report-information" >
+                                                some information ........................................................................................................................................................................
+                                            </div>
+                                            <div class="col-2 report-sender mt-4">
+                                                <small>sender@bk.com</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show " id="v-pills-customer" role="tabpanel" aria-labelledby="v-pills-customer-tab">
+                    <div class="container text-center">
+                        <h2>List customer</h2>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Year of Birth</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each= "user : ${theUserList}">
+                                    <th scope="row" th:text="${user.ID}"></th>
+                                    <td th:text="${user.Name}"></td>
+                                    <td th:text="${user.YearOfBirth}"></td>
+                                    <td th:text="${user.Address}"></td>
+                                    <td th:text="${user.PhoneNumber}"></td>
+                                    <td th:text="${user.Email}"></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade show " id="v-pills-admin" role="tabpanel" aria-labelledby="v-pills-admin-tab">
+                    <div class="container text-center">
+                        <h2>List Admin</h2>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Year of Birth</th>
+                                    <th scope="col">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade show " id="v-pills-location" role="tabpanel" aria-labelledby="v-pills-location-tab">
+                    <div class="container text-center">
+                        <h2>List Location</h2>
+                        <table class="table" id="productSizes" >
+                            <thead class="thead-dark">
+                                <tr class="d-flex">
+                                    <th scope="col" class="col-2">Tile</th>
+                                    <th scope="col" class="col-3">Detail</th>
+                                    <th scope="col" class="col-2">Image</th>
+                                    <th scope="col" class="col-2">Time</th>
+                                    <th scope="col" class="col-1">Province</th>
+                                    <th scope="col" class="col-1">Category</th>
+                                    <th scope="col" class="col-1">People</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each= "location : ${theLocationList}" class="d-flex">
+                                    <td class="col-2" contenteditable="true" th:text="${location.Title}" ></td>
+                                    <td class="col-3" contenteditable="true" th:text="${location.Detail}" ></td>
+                                    <td class="col-2" contenteditable="true" th:text="${location.Image}" ></td>
+                                    <td class="col-2" contenteditable="true" th:text="${location.TimeUpdate}"></td>
+                                    <td class="col-1" contenteditable="true" th:text="${location.Province}" ></td>
+                                   	<td class="col-1" contenteditable="true" th:text="${location.Category}" ></td>
+                                   	<td class="col-1" contenteditable="true" th:text="${location.People}" ></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
